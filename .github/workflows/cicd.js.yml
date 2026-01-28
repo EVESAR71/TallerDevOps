@@ -6,11 +6,11 @@ on:
   # Se ejecuta cuando hay un push a las ramas especificadas
   push:
     branches:
-      - dev_cicd     # Rama de desarrollo (opcional, puedes eliminarla si no la usas
+      - main     # Rama de desarrollo (opcional, puedes eliminarla si no la usas
   # Se ejecuta cuando se crea un Pull Request hacia estas ramas
   pull_request:
     branches:
-      - dev_cicd
+      - main
 
 # Define las variables de entorno globales para todos los jobs
 env:
@@ -22,23 +22,23 @@ jobs:
   # JOB 1: LINTING Y VERIFICACIÓN DE CÓDIGO
   # ============================================
   lint:
-    name: 🔍 Lint Code
+    name: Lint Code
     runs-on: ubuntu-latest  # Sistema operativo donde se ejecutará
 
     steps:
       # Descarga el código del repositorio
-      - name: 📥 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       # Configura Node.js en el runner
-      - name: 🔧 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'  # Cachea las dependencias de npm para acelerar builds
 
       # Instala las dependencias del proyecto
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm ci  # ci es más rápido y confiable que install para CI
 
       # Ejecuta ESLint para verificar la calidad del código
